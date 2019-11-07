@@ -4,10 +4,20 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-
+import android.widget.TextView;
+import android.os.CountDownTimer;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.os.SystemClock;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import io.particle.android.sdk.cloud.ParticleCloud;
 import io.particle.android.sdk.cloud.ParticleCloudSDK;
@@ -33,19 +43,40 @@ public class MainActivity extends AppCompatActivity {
 
     // MARK: Particle device
     private ParticleDevice mDevice;
+    Button btn;
+    int count=0;
+    TextView txtView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        txtView = findViewById(R.id.txtTimer);
+        btn =findViewById(R.id.tmrButton);
 
-        // 1. Initialize your connection to the Particle API
+
         ParticleCloudSDK.init(this.getApplicationContext());
-
         // 2. Setup your device variable
         getDeviceFromCloud();
 
     }
+
+
+    public void click(View view) {
+
+        new CountDownTimer(20000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                txtView.setText(String.valueOf(count));
+                count++;
+            }
+            @Override
+            public void onFinish() {
+                txtView.setText("0");
+            }
+        }.start();
+    }
+
 
 
     /**
@@ -114,6 +145,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, exception.getBestMessage());
             }
         });
+
+
+
+
+
     }
 
     public void turnParticleRed() {
