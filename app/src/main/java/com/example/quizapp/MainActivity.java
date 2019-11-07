@@ -54,13 +54,11 @@ public class MainActivity extends AppCompatActivity {
         txtView = findViewById(R.id.txtTimer);
         btn =findViewById(R.id.tmrButton);
 
-
         ParticleCloudSDK.init(this.getApplicationContext());
         // 2. Setup your device variable
         getDeviceFromCloud();
 
     }
-
 
     public void click(View view) {
 
@@ -121,9 +119,9 @@ public class MainActivity extends AppCompatActivity {
                 // put your logic here to talk to the particle
                 // --------------------------------------------
                 List<String> functionParameters = new ArrayList<String>();
-                functionParameters.add("green");
+                functionParameters.add("score");
                 try {
-                    mDevice.callFunction("answer", functionParameters);
+                    mDevice.callFunction("score", functionParameters);
 
                 } catch (ParticleDevice.FunctionDoesNotExistException e1) {
                     e1.printStackTrace();
