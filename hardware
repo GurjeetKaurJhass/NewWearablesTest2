@@ -1,0 +1,83 @@
+#include <InternetButton.h>
+
+InternetButton button = InternetButton();
+int DELAY = 200;
+void setup() {
+ button.begin();
+Particle.function("smile",Smile);
+Particle.function("smile",Smile2);
+Particle.function("smile",Smile3);
+Particle.function("smile",Smile4);
+Particle.function("smile",Smile5);
+Particle.function("smile",Angry);
+
+    for(int i=0;i<3;i++){
+    button.allLedsOn(0,20,0);
+    delay(500);
+    button.allLedsOff();   
+    delay(500);
+    }
+
+void loop() {
+
+
+
+}
+
+int Smile(String cmd){
+      button.allLedsOff();
+
+    for(int i = 3; i <= 9; i++){
+        button.ledOn(i,0,255,0);
+        button.ledOn(1,0,255,0);
+        button.ledOn(11,0,255,0);
+    }
+
+
+
+int Smile2(String cmd){
+    button.allLedsOff();
+
+    for(int i = 4; i <= 8; i++){
+        button.ledOn(i,0,255,0);
+        button.ledOn(1,0,255,0);
+        button.ledOn(11,0,255,0);
+    }
+
+
+int Smile3(String cmd){
+      button.allLedsOff();
+
+    for(int i = 5; i <= 7; i++){
+        button.ledOn(i,0,255,0);
+        button.ledOn(1,0,255,0);
+        button.ledOn(11,0,255,0);
+    }
+
+
+
+int Smile4(String cmd){
+      button.allLedsOff();
+        button.ledOn(6,0,255,0);
+        button.ledOn(1,0,255,0);
+        button.ledOn(11,0,255,0);
+}
+
+
+int Smile5(String cmd){
+      button.allLedsOff();
+        // button.ledOn(6,0,255,0);
+        button.ledOn(1,0,255,0);
+        button.ledOn(11,0,255,0);
+}
+
+
+int Angry(String cmd){
+      button.allLedsOff();
+        // button.ledOn(6,0,255,0);
+        for(int i = 5; i <= 7; i++){
+        button.ledOn(i,255,0,0);
+        button.ledOn(1,255,0,0);
+        button.ledOn(11,255,0,0);
+    }
+
