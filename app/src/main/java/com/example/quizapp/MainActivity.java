@@ -61,18 +61,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void click(View view) {
-
+        String count1=String.valueOf(count);
+         showAnimation(count1);
         new CountDownTimer(20000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 txtView.setText(String.valueOf(count));
                 count++;
+
+                for(int i=0;i<count;i++)
+                {
+                    showAnimation(count1);
+                }
+
+
+
             }
             @Override
             public void onFinish() {
                 txtView.setText("0");
             }
         }.start();
+
+
+
+
     }
 
 
@@ -119,9 +132,9 @@ public class MainActivity extends AppCompatActivity {
                 // put your logic here to talk to the particle
                 // --------------------------------------------
                 List<String> functionParameters = new ArrayList<String>();
-                functionParameters.add("score");
+                functionParameters.add("smile");
                 try {
-                    mDevice.callFunction("score", functionParameters);
+                    mDevice.callFunction("smile", functionParameters);
 
                 } catch (ParticleDevice.FunctionDoesNotExistException e1) {
                     e1.printStackTrace();
@@ -145,9 +158,41 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
 
 
+    public void showAnimation(String count1) {
+        Async.executeAsync(ParticleCloudSDK.getCloud(), new Async.ApiWork<ParticleCloud, Object>() {
+            @Override
+            public Object callApi(@NonNull ParticleCloud particleCloud) throws ParticleCloudException, IOException {
+                // put your logic here to talk to the particle
+                // --------------------------------------------
+                List<String> functionParameters = new ArrayList<String>();
+                functionParameters.add(count1);
 
+                try {
+                    mDevice.callFunction("smile", functionParameters);
+
+                } catch (ParticleDevice.FunctionDoesNotExistException e1) {
+                    e1.printStackTrace();
+                }
+                return -1;
+            }
+
+
+            @Override
+            public void onSuccess(Object o) {
+                // put your success message here
+                Log.d(TAG, "Success: Turned light green!!");
+            }
+
+
+            @Override
+            public void onFailure(ParticleCloudException exception) {
+                // put your error handling code here
+                Log.d(TAG, exception.getBestMessage());
+            }
+        });
     }
 
     public void turnParticleRed() {
