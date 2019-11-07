@@ -19,7 +19,7 @@ import io.particle.android.sdk.utils.Async;
 
 public class MainActivity extends AppCompatActivity {
     // MARK: Debug info
-    private final String TAG="QUIZ";
+    private final String TAG="Test2";
 
     // MARK: Particle Account Info
     private final String PARTICLE_USERNAME = "gurjit.babrah@gmail.com";
